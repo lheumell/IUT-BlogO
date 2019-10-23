@@ -1,5 +1,5 @@
 <?php
-
+session_start() ;
 require_once '../includes/config.php';
 
 $pt = new PostTable();
@@ -14,6 +14,11 @@ if (isset($_POST['title']) && isset($_POST['content'])) {
 if(!empty(($_GET['id']))){
     $getid = intval($_GET['id']);
     $pt->delete($getid);
+    header('location:index.php');
+}
+
+if(!empty($_GET['deco'])){
+    session_destroy();
     header('location:index.php');
 }
 
@@ -42,7 +47,10 @@ $posts = $pt->all();
 <body>
 <a class="nav-link" href="connexion.php">Connexion</a>
 <a class="nav-link"  href="inscription.php">Inscription</a>
-
+<a class="nav-link" name="deco" href="index.php?deco=1" >Deconnexion</a>
+<?php if(!empty($_SESSION['id'])){ ?>
+<p>Vous êtes connecté en tant que <?= $_SESSION['nom']  ?></p>
+<?php }?>
 
     <div class="container">
         <h1 class="text-center">Blog</h1>

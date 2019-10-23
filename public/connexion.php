@@ -24,6 +24,7 @@ if (!empty($_POST['connexion'])){
       if ($nb_con == 1){
           $userinfo = $con->fetch();
           $_SESSION['id'] = $userinfo['id'];
+          $_SESSION['nom'] = $userinfo['nom'];
           header('location:index.php');
       }
   }

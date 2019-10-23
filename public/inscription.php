@@ -1,5 +1,5 @@
 <?php
-
+session_start() ;
 require_once '../includes/config.php';
 
 $pt = new PostTable();
@@ -12,7 +12,7 @@ if(!empty($_POST['submit'])){
         $post = new Post();
         $post->setnom($_POST['nom']);
         $post->setemail($_POST['email']);
-        $post->setpassword($_POST['password']);
+        $post->setpassword(sha1($_POST['password']));
 
         $pt->inscription($post);
 
